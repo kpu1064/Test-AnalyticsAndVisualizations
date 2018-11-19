@@ -1,0 +1,27 @@
+#imports    
+import numpy as np    
+import pandas as pd    
+import matplotlib.pyplot as plt    
+import matplotlib    
+matplotlib.rcParams.update({'font.size': 18})    
+#helper functions    
+def arrange_data(data_frame):    
+    date_array = np.zeros((12,31))    
+    for k in range(len(data_frame)):    
+        date_array[data_frame.iloc[k,1]-1,df.iloc[k,2]-1] += data_frame.iloc[k,3]    
+    return date_array    
+def plot_heat_map(data):    
+    fig, ax = plt.subplots(figsize = [20,12])    
+    plt.imshow(data**5, cmap='RdPu', interpolation='nearest')    
+    plt.yticks(np.arange(12), ('Jan.','Feb.','Mar.','Apr.','May','Jun.','Jul.','Aug.','Sep.','Oct.','Nov.','Dec.'))    
+    plt.xticks(np.arange(31), np.arange(31)+1)    
+    for h in range(11):    
+        plt.plot((-0.5,30.5), (h+0.5,h+0.5), color='white')    
+    for h in range(31):    
+        plt.plot((h+0.5,h+0.5), (-0.5,11.5), color='white')    
+    plt.show()    
+#load data    
+df = pd.read_csv('Data/US_births.csv', header=None, usecols=[0,1,2,4])    
+#arange data and plot heatmap    
+date_array = arrange_data(df)    
+plot_heat_map(date_array)
